@@ -1,0 +1,3 @@
+/*This will ensure that any table with class 
+ "table-hover" has the "Pointer" cursor:*/
+table.table-hover:hover{ cursor: pointer; }
