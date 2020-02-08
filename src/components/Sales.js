@@ -8,6 +8,7 @@ class Sales extends React.Component {
         sales: [],
         currentPage: 1
       }
+      this.previousPage = this.previousPage.bind(this);
     }
     
     getData(page){
@@ -30,6 +31,29 @@ class Sales extends React.Component {
       });
 
     }
+
+   componentDidMount(){ // Called after a component is mounted.
+    this.getData(this.state.currentPage)
+    .then((data)=>{
+      for(let i = 0; i < data.sales.length; i++){ // check to see if this is ok
+        this.state.sales.push(data.sales[i]);
+      }
+      this.state.sales = data.sales;
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+   }
+
+   previousPage(){
+     if(this.state.currentPage > 1){
+       this.getData(this.state.currentPage-1); //  the above is the case, invoke the "getData()" method with the value of (currentPage in the state - 1)
+     }
+     // not sure if/when we are suspose to use set state.
+
+   }
+
+
     render() {
         return <div><h1>Sales</h1></div>
     }
