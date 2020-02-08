@@ -1,17 +1,14 @@
 import React from 'react';
 import './App.css';
-import {
-  Navbar, Nav, NavItem, NavDropdown, MenuItem,
-  FormGroup, FormControl, Grid, Row, Col
-} from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import { Link, Switch, Redirect, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class App extends React.Component { // not sure if you need this for the App component
   constructor() {
     this.state = {
-      recentlyViewed =[],
-      searchId = ""
+      recentlyViewed: [],
+      searchId: ""
     };
     this.viewSaleId = this.viewSaleId.bind(this);
     this.updateSearchId = this.updateSearchId.bind(this);
