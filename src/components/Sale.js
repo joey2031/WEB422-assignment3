@@ -5,4 +5,4 @@ class Sale extends React.Component{
      return <div><h1>Sale {this.props.id}</h1></div>
      }
 }
-export default Sales;
+export default Sale;

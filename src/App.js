@@ -3,9 +3,13 @@ import './App.css';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import { Link, Switch, Redirect, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import Sale from './components/Sale';
+import Sales from './components/Sales';
+import NotFound from './components/NotFound';
 
 class App extends React.Component { // not sure if you need this for the App component
-  constructor() {
+  constructor(props) {
+    super(props);
     this.state = {
       recentlyViewed: [],
       searchId: ""
@@ -16,8 +20,8 @@ class App extends React.Component { // not sure if you need this for the App com
 
   // ASK: this method must have the value of "this" correctly bound to the function in the constructor?
   viewSaleId(id) {
-    if (state.recentlyViewed.indexOf(id) === -1) {
-      state.recentlyViewed.push(id);
+    if (this.state.recentlyViewed.indexOf(id) === -1) {
+      this.state.recentlyViewed.push(id);
 
 
       // Updates the state with the updated "recentlyViewed" array, causing the component to render means call set state
@@ -79,7 +83,7 @@ class App extends React.Component { // not sure if you need this for the App com
                  <Sales />
                )}/>
 
-               <Route exact path="/Sales/:id" render={(props)=>(
+               <Route exact path="/Sale/:id" render={(props)=>(
                  //this is taking 2 paramaters but the component only hase 1
                 <Sale id={props.match.params.id} viewedSale={this.viewSaleId}/> 
                )}/>
