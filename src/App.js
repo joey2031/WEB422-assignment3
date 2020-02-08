@@ -83,9 +83,8 @@ class App extends React.Component { // not sure if you need this for the App com
                )}/>
 
                <Route exact path="/Sales/:id" render={(props)=>(
-                 // Not sure if syntax is correct for viewedSale, 
-                 //also, this is taking 2 paramaters but the component only hase 1
-                <Sale id={props.match.params.id} viewedSale={this.viewSaleId()}/> 
+                 //this is taking 2 paramaters but the component only hase 1
+                <Sale id={props.match.params.id} viewedSale={this.viewSaleId}/> 
                )}/>
                
                <Route render={()=>(
