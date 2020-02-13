@@ -14,12 +14,11 @@ class App extends React.Component { // not sure if you need this for the App com
       recentlyViewed: [],
       searchId: ""
     };
-    this.viewSaleId = this.viewSaleId.bind(this);
+    this.viewedSale = this.viewedSale.bind(this);
     this.updateSearchId = this.updateSearchId.bind(this);
   }
 
-  // ASK: this method must have the value of "this" correctly bound to the function in the constructor?
-  viewSaleId(id) {
+  export viewedSale(id) {
     if (this.state.recentlyViewed.indexOf(id) === -1) {
       this.state.recentlyViewed.push(id);
 

@@ -79,12 +79,11 @@ class Sales extends React.Component {
                 <th>Store Location</th>
                 <th>Number of Items</th>
                 <th>Sale Date</th>
-                <tr key={this.state.sales._id} onClick={() => { this.props.history.push(`/Sale/${this.state.sales._id}`) }}></tr>
               </tr>
             </thead>
             <tbody>
               {this.state.sales.map(data =>
-                <tr>
+            <tr key={data._id} onClick={()=>{this.props.history.push(`/sales/${data._id}`)}}> 
                   <td>{data.customer.email}</td>
                   <td>{data.storeLocation}</td>
                   <td>{data.items.length}</td>
@@ -102,8 +101,7 @@ class Sales extends React.Component {
       );
     } else {
       //return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
-
-      return ( // never actually saw this worl, need to test it somehow
+      return ( // never actually saw this work, need to test it somehow- Not working
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
             <span className="sr-only">Loading...</span>
@@ -114,25 +112,7 @@ class Sales extends React.Component {
 
     }
 
-
   }
 
-
-  /*
-
-    } else {
-       //return null; // "loading "
-       return ( //test this- I dont think its working
-       <div className="d-flex justify-content-center">
-           <div className="spinner-border" role="status">
-             <span className="sr-only">Loading...</span>
-           </div>
-         </div>
-
-       );
-
-    }
-  
-  */
 }
 export default withRouter(Sales);

@@ -1,5 +1,6 @@
 import React from 'react';
 import Sales from './Sales';
+import { viewedSale } from '../App';
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 class Sale extends React.Component {
      constructor(props) {
@@ -13,9 +14,13 @@ class Sale extends React.Component {
      componentDidMount() {
           fetch(`https://stormy-fjord-91108.herokuapp.com/api/sale/${this.props.id}`)
                .then((data) => {
-                    this.setState = {
-                         sale: data
+                    if (data._id != null) { // check to see if it has an id
+                         viewedSale(data._id);
+                         this.setState = {
+                              sale: data
+                         }
                     }
+
                }).catch((err) => {
                     console.log(err);
                });
@@ -24,7 +29,7 @@ class Sale extends React.Component {
      componentDidUpdate(prevProps) {
           if (prevProps.id !== this.props.id) {
                this.state.loading = true;
-          }
+          }  // In the first assignment they told us  sales instead of sale
           fetch(`https://stormy-fjord-91108.herokuapp.com/api/sale/${this.props.id}`)
                .then((data) => {
                     this.setState = {
