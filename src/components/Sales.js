@@ -67,19 +67,19 @@ class Sales extends React.Component {
 
   }
 
-
+// Im geting warnings/errors in the console.
   render() {
     if (this.state.sales.length > 0) {
       return (
         <div>
           <Table hover>
             <thead>
-              <tr>
+              <tr> 
                 <th>Customer</th>
                 <th>Store Location</th>
                 <th>Number of Items</th>
                 <th>Sale Date</th>
-                <tr key={sale._id} onClick={() => { this.props.history.push(`/Sale/${sale._id}`) }}></tr>
+                <tr key={this.state.sales._id} onClick={() => { this.props.history.push(`/Sale/${this.state.sales._id}`) }}></tr>
               </tr>
             </thead>
             <tbody>
@@ -88,20 +88,30 @@ class Sales extends React.Component {
                   <td>{data.customer.email}</td>
                   <td>{data.storeLocation}</td>
                   <td>{data.items.length}</td>
-                  <td>{ new Date(data.saleDate).toLocaleDateString()}</td>
+                  <td>{new Date(data.saleDate).toLocaleDateString()}</td>
                 </tr>
               )}
-      </tbody>
+            </tbody>
           </Table>
           <Pagination>
             <Pagination.Prev onClick={this.previousPage} />
-              <Pagination.Item>{this.state.currentPage}</Pagination.Item>
+            <Pagination.Item>{this.state.currentPage}</Pagination.Item>
             <Pagination.Next onClick={this.nextPage} />
-      </Pagination>
+          </Pagination>
         </div>
       );
     } else {
-      return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
+      //return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
+
+      return ( // never actually saw this worl, need to test it somehow
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      );
+
     }
 
 
@@ -109,16 +119,7 @@ class Sales extends React.Component {
 
 
   /*
-   Testing code to put in render to show as a list:
-      if (this.state.sales.length > 0) {
-      return <div><h1>Sales</h1>
-        <ul>
-          {this.state.sales.map((sale) => {
-            return <li key={sale._id}> {sale.customer.email} </li>
-          })}
-        </ul>
 
-      </div>
     } else {
        //return null; // "loading "
        return ( //test this- I dont think its working

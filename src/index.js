@@ -1,3 +1,13 @@
+/*********************************************************************************
+* WEB422 – Assignment 3
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy.
+* No part of this assignment has been copied manually or electronically from any other source
+* (including web sites) or distributed to other students.
+*
+* Name: Joseph (Joey) Assal Student ID: 108119181 Date: Feb 14, 2020
+*
+*
+********************************************************************************/ 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
