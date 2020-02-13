@@ -9,20 +9,21 @@ class Sales extends React.Component {
       currentPage: 1
     }
     this.previousPage = this.previousPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   getData(page) {
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       fetch(`https://stormy-fjord-91108.herokuapp.com/api/sales?page=${page}&perPage=10`)
-       .then(result => result.json())
-       .then((data) =>{
-         resolve(data);
-       })
-      .catch((err) => {
-        reject(err);
-      });
+        .then(result => result.json())
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
-    
+
   }
 
   componentDidMount() { // Called after a component is mounted.
@@ -43,28 +44,94 @@ class Sales extends React.Component {
   previousPage() {
     if (this.state.currentPage > 1) {
       this.getData(this.state.currentPage - 1).then((data) => {
-        this.setState({
-          sales: data
+        this.setState({ // update state
+          sales: data,
+          currentPage: this.state.currentPage - 1
         })
-      }).catch(() => { }); //  the above is the case, invoke the "getData()" method with the value of (currentPage in the state - 1)
+      }).catch((err) => {
+        console.log(err);
+      }); //  the above is the case, invoke the "getData()" method with the value of (currentPage in the state - 1)
     }
+  }
+
+  nextPage() {
+    this.getData(this.state.currentPage + 1).then((data) => {
+      this.setState({
+        sales: data,
+        currentPage: this.state.currentPage + 1
+      })
+
+    }).catch((err) => {
+      console.log(err);
+    });
+
   }
 
 
   render() {
-  if(this.state.sales.length > 0){
-    return <div><h1>Sales</h1>
-    <ul>
-    {this.state.sales.map((sale)=>{
-      return <li key={sale._id}> {sale.customer.email} </li>
-    })}
-    </ul>
-    
-    </div>
-  }else{
-    return null; // "loading "
+    if (this.state.sales.length > 0) {
+      return (
+        <div>
+          <Table hover>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Store Location</th>
+                <th>Number of Items</th>
+                <th>Sale Date</th>
+                <tr key={sale._id} onClick={() => { this.props.history.push(`/Sale/${sale._id}`) }}></tr>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.sales.map(data =>
+                <tr>
+                  <td>{data.customer.email}</td>
+                  <td>{data.storeLocation}</td>
+                  <td>{data.items.length}</td>
+                  <td>{ new Date(data.saleDate).toLocaleDateString()}</td>
+                </tr>
+              )}
+      </tbody>
+          </Table>
+          <Pagination>
+            <Pagination.Prev onClick={this.previousPage} />
+              <Pagination.Item>{this.state.currentPage}</Pagination.Item>
+            <Pagination.Next onClick={this.nextPage} />
+      </Pagination>
+        </div>
+      );
+    } else {
+      return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
+    }
+
+
   }
-    
-  }
+
+
+  /*
+   Testing code to put in render to show as a list:
+      if (this.state.sales.length > 0) {
+      return <div><h1>Sales</h1>
+        <ul>
+          {this.state.sales.map((sale) => {
+            return <li key={sale._id}> {sale.customer.email} </li>
+          })}
+        </ul>
+
+      </div>
+    } else {
+       //return null; // "loading "
+       return ( //test this- I dont think its working
+       <div className="d-flex justify-content-center">
+           <div className="spinner-border" role="status">
+             <span className="sr-only">Loading...</span>
+           </div>
+         </div>
+
+       );
+
+    }
+  
+  */
 }
 export default withRouter(Sales);
