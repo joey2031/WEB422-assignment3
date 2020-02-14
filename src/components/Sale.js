@@ -1,7 +1,6 @@
-// TODO As about viewSaleId function and app export
+// TODO: Fix viewed sale, and when I click on a sale it gives me an error
 import React from 'react';
 import Sales from './Sales';
-import { App } from '../App';
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 class Sale extends React.Component {
      constructor(props) {
@@ -13,14 +12,17 @@ class Sale extends React.Component {
      }
 
      componentDidMount() {
-          fetch(`https://stormy-fjord-91108.herokuapp.com/api/sale/${this.props.id}`)
+          fetch(`https://stormy-fjord-91108.herokuapp.com/api/sales/${this.props.id}`)
+          .then(res=>res.json())
                .then((data) => {
+                    console.log(data);
                     if (data._id != null) { // check to see if it has an id
-                         viewedSale(data._id);
-                         this.setState = {
-                              sale: data
-                         };
-                         <App viewedSale={()=> this.viewedSale(this.props.id)}/>
+                       this.props.viewedSale(data._id);
+                         this.setState({
+                              sale: data,
+                              loading: false
+                         });
+                         // <App viewedSale={()=> this.viewedSale(this.props.id)}/>
                     }
 
                }).catch((err) => {
@@ -31,17 +33,19 @@ class Sale extends React.Component {
      componentDidUpdate(prevProps) {
           if (prevProps.id !== this.props.id) {
                this.state.loading = true;
-          }  // In the first assignment they told us  sales instead of sale
-          fetch(`https://stormy-fjord-91108.herokuapp.com/api/sale/${this.props.id}`)
+            // In the first assignment they told us sales instead of sale
+          fetch(`https://stormy-fjord-91108.herokuapp.com/api/sales/${this.props.id}`)
+               .then(res => res.json())
                .then((data) => {
-                    this.setState = {
-                         sale: data
-                    }
+                    this.setState({
+                         sale: data,
+                         loading: false
+                    });
 
                }).catch((err) => {
                     console.log(err);
                });
-
+          }
      }
 
      itemTotal(items) { // takes an array of item objects
@@ -53,16 +57,18 @@ class Sale extends React.Component {
      // Not working, fix tommorow
      render() {
           if (this.state.loading) {
+            
                return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
           } else {
+              
                if (this.state.sale._id) {
                     return (<div>
                          <h1>Sale: {this.state.sale._id}</h1>
                          <h2>Customer</h2>
                          <ListGroup>
-                              <ListGroupItem><strong>email:</strong>{this.state._id}</ListGroupItem>
-                              <ListGroupItem><strong>age:</strong>{this.state.customer.age}</ListGroupItem>
-                              <ListGroupItem><strong>satisfaction:</strong>{this.state.customer.satisfaction}/5</ListGroupItem>
+                              <ListGroupItem><strong>email:</strong>{this.state.sale._id}</ListGroupItem>
+                              <ListGroupItem><strong>age:</strong>{this.state.sale.customer.age}</ListGroupItem>
+                              <ListGroupItem><strong>satisfaction:</strong>{this.state.sale.customer.satisfaction}/5</ListGroupItem>
                          </ListGroup>
                          <h2> Items: How do I do the total?</h2>
                          <Table>
@@ -74,8 +80,8 @@ class Sale extends React.Component {
                                    </tr>
                               </thead>
                               <tbody>
-                                   {this.state.sales.map(data =>
-                                        <tr>
+                                   {this.state.sale.items.map((data, index) =>
+                                        <tr key={index}>
                                              <td>{data.name}</td>
                                              <td>{data.quantity}</td>
                                              <td>{data.price}</td>

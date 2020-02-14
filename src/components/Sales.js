@@ -83,7 +83,7 @@ class Sales extends React.Component {
             </thead>
             <tbody>
               {this.state.sales.map(data =>
-            <tr key={data._id} onClick={()=>{this.props.history.push(`/sales/${data._id}`)}}> 
+            <tr key={data._id} onClick={()=>{this.props.history.push(`/sale/${data._id}`)}}> 
                   <td>{data.customer.email}</td>
                   <td>{data.storeLocation}</td>
                   <td>{data.items.length}</td>
