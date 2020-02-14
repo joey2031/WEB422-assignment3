@@ -1,6 +1,7 @@
+// TODO As about viewSaleId function and app export
 import React from 'react';
 import Sales from './Sales';
-import { viewedSale } from '../App';
+import { App } from '../App';
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 class Sale extends React.Component {
      constructor(props) {
@@ -18,7 +19,8 @@ class Sale extends React.Component {
                          viewedSale(data._id);
                          this.setState = {
                               sale: data
-                         }
+                         };
+                         <App viewedSale={()=> this.viewedSale(this.props.id)}/>
                     }
 
                }).catch((err) => {

@@ -18,7 +18,7 @@ class App extends React.Component { // not sure if you need this for the App com
     this.updateSearchId = this.updateSearchId.bind(this);
   }
 
-  export viewedSale(id) {
+  viewedSale(id) {
     if (this.state.recentlyViewed.indexOf(id) === -1) {
       this.state.recentlyViewed.push(id);
 
