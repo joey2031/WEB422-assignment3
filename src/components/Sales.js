@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'; // will give us access to a "history" object on this.props so that we can programmatically change routes
 import { Table, Pagination } from 'react-bootstrap';
+import Loading from './Loading';
 class Sales extends React.Component {
   constructor(props) {
     super(props);
@@ -100,15 +101,7 @@ class Sales extends React.Component {
         </div>
       );
     } else {
-      //return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
-      return ( // never actually saw this work, need to test it somehow- Not working
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        </div>
-
-      );
+      return <Loading></Loading>
 
     }
 

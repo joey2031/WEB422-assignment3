@@ -1,7 +1,6 @@
-// TODO: Fix viewed sale, and when I click on a sale it gives me an error
 import React from 'react';
-import Sales from './Sales';
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
+import Loading from './Loading';
 class Sale extends React.Component {
      constructor(props) {
           super(props);
@@ -17,12 +16,11 @@ class Sale extends React.Component {
                .then((data) => {
                     console.log(data);
                     if (data._id != null) { // check to see if it has an id
-                       this.props.viewedSale(data._id);
+                       this.props.viewedSale(data._id); // the viewedSale function gets passed in via props
                          this.setState({
                               sale: data,
                               loading: false
                          });
-                         // <App viewedSale={()=> this.viewedSale(this.props.id)}/>
                     }
 
                }).catch((err) => {
@@ -49,16 +47,21 @@ class Sale extends React.Component {
      }
 
      itemTotal(items) { // takes an array of item objects
+          let itemTotal = 0;
           for (let i = 0; i < items.length; i++) {
-               items.itemTotal += (items[i].price * items[i].quanity);
+               console.log(items[i].price);
+               console.log(items[i].quantity);
+               itemTotal += (items[i].price * items[i].quantity);
           }
+          console.log(itemTotal);
+          return itemTotal;
 
      }
-     // Not working, fix tommorow
+     
      render() {
           if (this.state.loading) {
-            
-               return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
+               return <Loading></Loading>
+               //return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
           } else {
               
                if (this.state.sale._id) {
@@ -66,11 +69,11 @@ class Sale extends React.Component {
                          <h1>Sale: {this.state.sale._id}</h1>
                          <h2>Customer</h2>
                          <ListGroup>
-                              <ListGroupItem><strong>email:</strong>{this.state.sale._id}</ListGroupItem>
-                              <ListGroupItem><strong>age:</strong>{this.state.sale.customer.age}</ListGroupItem>
-                              <ListGroupItem><strong>satisfaction:</strong>{this.state.sale.customer.satisfaction}/5</ListGroupItem>
+                              <ListGroupItem><strong>email: </strong>{this.state.sale._id}</ListGroupItem>
+                              <ListGroupItem><strong>age: </strong>{this.state.sale.customer.age}</ListGroupItem>
+                              <ListGroupItem><strong>satisfaction: </strong>{this.state.sale.customer.satisfaction}/5</ListGroupItem>
                          </ListGroup>
-                         <h2> Items: How do I do the total?</h2>
+                         <h2> Items: {this.itemTotal(this.state.sale.items)}</h2>
                          <Table>
                               <thead>
                                    <tr>
