@@ -74,22 +74,22 @@ class App extends React.Component { // not sure if you need this for the App com
             <Col md={12}>
               <Switch>
 
-               <Route exact path="/" render={()=>(
+                <Route exact path="/" render={() => (
                   <Link to="/Sales"></Link> // Redirect to the /Sales route
-               )}/>
+                )} />
 
-               <Route exact path="/Sales" render={()=>(
-                 <Sales />
-               )}/>
+                <Route exact path="/Sales" render={() => (
+                  <Sales />
+                )} />
 
-               <Route exact path="/Sale/:id" render={(props)=>(
-                 //this is taking 2 paramaters but the component only hase 1
-                <Sale id={props.match.params.id} viewedSale={this.viewedSale}/> 
-               )}/>
-               
-               <Route render={()=>(
-                 <NotFound />
-               )}/>
+                <Route exact path="/Sale/:id" render={(props) => (
+                  //this is taking 2 paramaters but the component only hase 1
+                  <Sale id={props.match.params.id} viewedSale={this.viewedSale} />
+                )} />
+
+                <Route render={() => (
+                  <NotFound />
+                )} />
 
               </Switch>
             </Col>
