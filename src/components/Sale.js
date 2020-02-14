@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 import Loading from './Loading';
 class Sale extends React.Component {
      constructor(props) {

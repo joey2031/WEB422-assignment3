@@ -3,8 +3,14 @@ import React from 'react';
 
 class Loading extends React.Component {
     render() {
-        return (
-            <h1>Loading...</h1>
+        return ( 
+            // For some reason the sponner wouldnt work 
+            //I tried other imports and it always said Can't resolve 'react-bootstrap/...'
+             <h1>Loading...</h1>
+
+            // <Spinner animation="border" role="status">
+            //     <span className="sr-only">Loading...</span>
+            // </Spinner>
         )
     }
 
