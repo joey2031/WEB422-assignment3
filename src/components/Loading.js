@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap';
 class Loading extends React.Component {
     render() {
         return (
@@ -9,14 +9,3 @@ class Loading extends React.Component {
 
 }
 export default Loading;
-
-/*
-
- <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-
-
-*/
