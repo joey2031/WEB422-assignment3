@@ -63,39 +63,40 @@ class Sale extends React.Component {
                return <Loading></Loading>
                //return null; // NOTE: This can be changed to render a <Loading /> Component for a better user experience
           } else {
+               return <Loading></Loading>
               
-               if (this.state.sale._id) {
-                    return (<div>
-                         <h1>Sale: {this.state.sale._id}</h1>
-                         <h2>Customer</h2>
-                         <ListGroup>
-                              <ListGroupItem><strong>email: </strong>{this.state.sale._id}</ListGroupItem>
-                              <ListGroupItem><strong>age: </strong>{this.state.sale.customer.age}</ListGroupItem>
-                              <ListGroupItem><strong>satisfaction: </strong>{this.state.sale.customer.satisfaction}/5</ListGroupItem>
-                         </ListGroup>
-                         <h2> Items: {this.itemTotal(this.state.sale.items)}</h2>
-                         <Table>
-                              <thead>
-                                   <tr>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                   </tr>
-                              </thead>
-                              <tbody>
-                                   {this.state.sale.items.map((data, index) =>
-                                        <tr key={index}>
-                                             <td>{data.name}</td>
-                                             <td>{data.quantity}</td>
-                                             <td>{data.price}</td>
-                                        </tr>
-                                   )}
-                              </tbody>
-                         </Table>
-                    </div>);
-               } else {
-                    return <div><h1>Unable to find Sale</h1><p>id: {this.props.id}</p></div>
-               }
+               // if (this.state.sale._id) {
+               //      return (<div>
+               //           <h1>Sale: {this.state.sale._id}</h1>
+               //           <h2>Customer</h2>
+               //           <ListGroup>
+               //                <ListGroupItem><strong>email: </strong>{this.state.sale._id}</ListGroupItem>
+               //                <ListGroupItem><strong>age: </strong>{this.state.sale.customer.age}</ListGroupItem>
+               //                <ListGroupItem><strong>satisfaction: </strong>{this.state.sale.customer.satisfaction}/5</ListGroupItem>
+               //           </ListGroup>
+               //           <h2> Items: {this.itemTotal(this.state.sale.items)}</h2>
+               //           <Table>
+               //                <thead>
+               //                     <tr>
+               //                          <th>Product Name</th>
+               //                          <th>Quantity</th>
+               //                          <th>Price</th>
+               //                     </tr>
+               //                </thead>
+               //                <tbody>
+               //                     {this.state.sale.items.map((data, index) =>
+               //                          <tr key={index}>
+               //                               <td>{data.name}</td>
+               //                               <td>{data.quantity}</td>
+               //                               <td>{data.price}</td>
+               //                          </tr>
+               //                     )}
+               //                </tbody>
+               //           </Table>
+               //      </div>);
+               // } else {
+               //      return <div><h1>Unable to find Sale</h1><p>id: {this.props.id}</p></div>
+               // }
           }
      }
 
