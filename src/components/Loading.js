@@ -4,7 +4,7 @@ import React from 'react';
 class Loading extends React.Component {
     render() {
         return ( 
-            // For some reason the sponner wouldnt work 
+            // For some reason the spinner wouldnt work 
             //I tried other imports and it always said Can't resolve 'react-bootstrap/...'
              <h1>Loading...</h1>
 
